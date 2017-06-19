@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title></title>
+
+	<style type="text/css">
+
+    body {
+        max-width: 90%;
+        width: 500px;
+        margin: 0 auto;
+        padding:10px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+	/*text fade in animation*/
+        #title p {
+            -webkit-animation-delay: .1s; /* Safari 4.0 - 8.0 */
+            -moz-animation-delay: .1s;
+            animation-delay: .1s;
+            -webkit-animation-duration: 1s;
+            -moz-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            -moz-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+		#question p {
+			-webkit-animation-delay: .1s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: .1s;
+    		animation-delay: .1s;
+		    -webkit-animation-duration: 1s;
+		    -moz-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            -moz-animation-fill-mode: both;
+            animation-fill-mode: both;
+		}
+
+		#question p:nth-of-type(2) {
+			-webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 1s;
+    		animation-delay: 1s;
+		}
+
+		#question p:nth-of-type(3) {
+			-webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 2s;
+    		animation-delay: 2s;
+		}
+
+		#question p:nth-of-type(4) {
+			-webkit-animation-delay: 3s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 3s;
+    		animation-delay: 3s;
+		}
+		#question p:nth-of-type(5) {
+			-webkit-animation-delay: 4s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 4s;
+    		animation-delay: 4s;
+		}
+		#question p:nth-of-type(6) {
+			-webkit-animation-delay: 5s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 5s;
+    		animation-delay: 5s;
+		}
+		#question p:nth-of-type(7) {
+			-webkit-animation-delay: 6s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 6s;
+    		animation-delay: 6s;
+		}
+		#question p:nth-of-type(8) {
+			-webkit-animation-delay: 7s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 7s;
+    		animation-delay: 7s;
+		}
+		#question p:nth-of-type(9) {
+			-webkit-animation-delay: 8s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 8s;
+    		animation-delay: 8s;
+		}
+		#question p:nth-of-type(10) {
+			-webkit-animation-delay: 9s; /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: 9s;
+    		animation-delay: 9s;
+		}
+
+		#answers p {
+			-webkit-animation-delay: var(--aDC); /* Safari 4.0 - 8.0 */
+    		-moz-animation-delay: var(--aDC);;
+    		animation-delay: var(--aDC);;
+		   -webkit-animation-duration: 1s;
+		   -moz-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            -moz-animation-fill-mode: both;
+            animation-fill-mode: both;
+		}
+
+		@-webkit-keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+         
+        @keyframes fadeIn {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+         
+        p {
+            -webkit-animation-name: fadeIn;
+            -moz-animation-name: fadeIn;
+            animation-name: fadeIn;
+		}
+		/*End text fade in animation*/
+		/*Image display on mousehover*/
+		#mouseOver {
+    		display: inline;
+    		position: relative;
+		}
+		#mouseOver img {
+    		position: absolute;
+    		left: 50%;
+    		transform: translate(-50%);
+    		bottom: 1em;
+    		opacity: 0;
+    		pointer-events: none;
+    		transition-duration: 800ms;
+		}
+		#mouseOver:hover img {
+    		opacity: 1;
+    		transition-duration: 400ms;
+		}
+		/*End image display on mouse hover*/
+
+        /*Blinker*/
+        .blink_me {
+              animation: blinker 4s linear infinite !important;
+        }
+        @keyframes blinker {
+              0% { opacity: 0; }
+              10% { opacity: 1; }
+              20% { opacity: 0; }
+              30% { opacity: 1; }
+              40% { opacity: 0; }
+              50% { opacity: 1; }
+              60% { opacity: 0; }
+              70% { opacity: 1; }
+              80% { opacity: 0; }
+              90% { opacity: 1; }
+              100% { opacity: 0; }
+        }
+        /*End blinker*/
+
+	</style>
+</head>
+<body>
+<div id="title"><p style="text-align:center;font-size:40px;">DERANGO</p></div>
+<noscript>
+      <div style="border: 1px solid purple; padding: 10px">
+        <span style="color:red">You must enable Javascript to continue!</span>
+      </div>
+    </noscript>
+    <a onclick="setLocation(29)">Shortcut</a>
+<div id="question"></div>
+<div id="answers"></div>
+
+<script>
+//	Shuffle javascript
+	function shuffle(array) {
+	  var currentIndex = array.length, temporaryValue, randomIndex;
+
+	  // While there remain elements to shuffle...
+	  while (0 !== currentIndex) {
+
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	  }
+
+		return array;
+		}
+// End Shuffle
+
+// <span id=\"mouseOver\"><img src=\"https://cdn4.iconfinder.com/data/icons/hotel-facilities-2/512/keycard-128.png\">cardkey</span>
+// <p style=\"-webkit-animation-delay:2s;animation-delay:2s;\">You fall and die.</p>
+
+// Story
+
+var db = [
+    {// 0
+        "question":"<p>MISSION BRIEF: Screaming has been heard from the Derango Facility.</p> <p>All attempts by law enforcement to enter the facility have failed.</p> <p>You are Tomahawk (\"Tom\" Codename: \"Hawk\") Abrams, the best infilitrator on the planet. You must sneak into the facility and determine the source of the screaming, then escape without being seen.</p> <p>While inside, you must acquire a cardkey that will allow military personnel to enter the building. You cannot leave until you've acquired this cardkey. Do not use <a onclick=\"setLocation(10)\">lethal force</a> unless absolutely necessary. Do not be seen.</p> <p>You are outside of the secret facility. You must infiltrate.</p>",
+        "answers":[
+            {"title":"Enter through door","response":1},
+            {"title":"Walk around the building","response":2},
+            {"title":"Get dagger","response":4}
+            ]
+    },
+    {// 1
+        "question":"<p>The door is locked. Duh.</p>",
+        "answers":[
+            {"title":"Go back","response":6}
+            ]
+    },
+    {// 2
+        "question":"<p>On the left side of the building you spot a window, and when you squint, the silhouette of a soldier inside.</p>",
+        "answers":[
+            {"title":"Approach the window. YOLO","response":3,"ident":"windowFight"},
+            {"title":"Ignore it and keep going","response":7}
+            ]
+    },
+    {// 3
+        "question":"<p>There is a soldier looking out the window. He shoots you.</p> <p>You fall and die.</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 4
+        "question":"<p id=\"getDagger\">You get a DAGGER.</p><p>You have no idea where it came from.</p><p>It sort of just appeared. This is some grade-school level writing.</p>",
+        "answers":[
+            {"title":"Continue","response":6}
+            ]
+    },
+    {// 5
+        "question":"<p>You approach the facility, and spot a soldier in the window.</p><p>Before he can shoot, you draw your dagger and throw it at him.</p><p>It spins through the air, licking the sunshine, humming. The soldier tries to fire his gun, but it's jammed. He tries to duck, but bangs his chin on the window sill. He bites his tongue. Blood squirts from his mouth. The dagger misses and hits the wall, five feet to the left of the soldier.</p> <p>It breaks in half.</p> <p>The window closes on the soldier's head, snapping his neck.</p><p>Another soldier hears the commotion. He runs over and sees his dead comrade. \"Dammit, Frank,\" he says, wiping away a tear. \"You were the best of us. You beautiful bastard. You're with the angels now.\"</p>",
+        "answers":[
+            {"title":"Back away slowly","response":2}
+        ]
+    },
+    {// 6
+        "question":"<p>You are outside of the secret facility. You must infiltrate.</p>",
+        "answers":[
+            {"title":"Enter through door","response":1,"ident":"bazookaOwned"},
+            {"title":"Walk around the building","response":2,"ident":"bazookaOwned2"}
+            ]
+    },
+    {// 7
+        "question":"<p>Behind the building you spot a shipping and receiving platform.</p> <p>You notice two soldiers unloading boxes from a truck. A third soldier, driving a miniature forklift, is scooping up the boxes and bringing them inside.</p>",
+        "answers":[
+            {"title":"kill... KILL... KILL... KILL!","response":8,"ident":"shippingFight"},
+            {"title":"Sneak into one of the boxes","response":13}
+            ]
+    },
+    {// 8
+        "question":"<p>You sprint at the soldiers, unleashing a blood-curling battle cry. The soldiers turn, and you can see the blood drain from their face with fear.</p> <p>Unfortunately, you are unarmed.</p><p>They shoot their guns at you.</p><p>Bullets riddle your body. You die.</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 9
+        "question":"<p>You sprint at the soldiers, unleashing a blood-curling battle cry. The soldiers turn, and you can see the blood drain from their face with fear.</p> <p>You bite the blade of your dagger and somersault through the air, a hail of bullets missing you by centimeters.</p><p>You land behind the first guard, and kick him square in the back. He flies through the air, and crashes into a red barrel lebeled \"flammable\". The barrel explodes. Your hair flies past your face from the force of the explosion.</p><p>The second guard fires his gun at you. You grab a splintered side of one of the boxes and use it like a shield to deflect the bullets. When his gun runs out of ammo, you throw your shield at him like a frisbee. It decapitates him cleanly.</p><p>The third guard, in his forklift, drives right at you. You take the dagger out of your mouth and throw it. It flies straight and true, and plunges deep into the gas tank of the forklift. The subsequent explosion can be heard miles away.</p><p>A tire, propelled by the blast, smacks you in the face.</p><p>You die.</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 10
+        "question":"<p>You obtain a BAZOOKA.</p><p>What the fuck.</p>",
+        "answers":[
+            {"title":"Continue","response":6}
+            ]
+    },
+    {// 11 Bazooka Ending
+        "question":"<p>You launch a missile at the facility. It explodes, and cement flies in every direction as an inferno grows and grows. You hear screaming.</p><p>You fire another missile. It enters the gaping hole your last shot created. The rocket disappears inside the smoke, and you hear nothing for a moment.</p><p>Then a deafening blast shakes the ground, and a fireball the size of a football stadium erupts from the facility. You hear screaming, and then nothing over the roaring of the fire.</p><p>The building begins to collapse.</p><p>You turn and walk away in slow motion, a gigantic blaze touching the clouds behind you. Your phone rings.</p><p>\"Hawk?\"<br><br>\"This is he.\"<br><br>\"You failed. You're fired\"</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 12 Intro
+        "question":"<p></p><p style=\"text-align:center;\">A REPORT</p><br><p class=\"blink_me\" style=\"text-align:center;font-size:20px;\"><a onclick=\"setLocation(0)\">START</a></p>",
+        "answers":[
+            
+            ]
+    },
+    {// 13
+        "question":"<p>You track the movement of the three soldiers, and soon, like a paranoid schizophrenic rifling through a neighbor's trash, you spot a pattern.</p><p>You somersault a few times to get in position behind a stack of wooden boxes, and when all three men turn away, you hide inside.</p><p>After a short wait, the forklift driver approaches and grabs your box, with you in tow.</p>",
+        "answers":[
+            {"title":"Strip naked and pop goes the weasel","response":14},
+            {"title":"Wait","response":15}
+            ]
+    },
+    {// 14
+        "question":"<p>You burst out of the box, naked as the day you were born.</p><p>If only momma could see us now.</p><p>The guard turns, horrified.</p><p>His reaction time is decent and his instincts on point, and he unloads the magazine of his assault rifle into your bare chest.</p><p>You whisper as you fall backwards, \"Worth it...\"</p><p>Years later, this very same guard will tell that story at a bar, and within earshot is the woman he will someday call his wife.</p><p>And they lived happily ever after. The end?</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 15
+        "question":"<p>You wait.</p><p>You can hear the motor of the forklift and its driver singing along to the radio and messing up the words of Laura Branigan's <em>Self Control</em>.</p><p><em>\"I said I... I'm living in the forest of my dreams.<br>\"I know the night is not has what's seen<br>\"I must believe in something<br>\"So I guess I'll just believe it<br>\"It's light will never go.\"</em></p>",
+        "answers":[
+            {"title":"Correct him","response":16},
+            {"title":"Keep waiting","response":17}
+            ]
+    },
+    {// 16
+        "question":"<p>You burst out of the box and sing.</p><p><em>\"I! I live among the creatures of the night!<br>\"I haven't got the will to try and fight!<br>\"Against a new tomorrow <br>\"So I guess I'll just believe it <br>\"That tomorrow never comes!\"</em></p><p>The guard turns and shoots you dead.</p><p>He continues singing the song incorrectly.</p><p id=\"stats\"></p>",
+        "answers":[
+            {"title":"Restart?","response":0}
+            ]
+    },
+    {// 17
+        "question":"<p>You clench your teeth and deal with the singing.</p><p>Finally, after what seemed like an eternity, he shuts his damn mouth. You hear another man, with a deeper voice, and older, direct the guard. \"Place the box down over there and leave us, please.\"</p><p>Your box is moved again, and a moment later you are lowered onto the floor. You hear the guard drive off.<p>There is silence now, though you know just feet away from you, there stands a gentleman who will soon discover that his delivery came with a little something extra.</p><p>You clench your fists and prepare for a fight, when suddenly, the man begins talking. </p><p>\"You can come on out of the box now, Hawk. You and I have a lot to talk about...\"</p>",
+        "answers":[
+            {"title":"Explode out of the box and kill this fool","response":18,"ident":"officeFight"},
+            {"title":"Wait","response":19},
+            {"title":"Open the box cautiously","response":20}
+            ]
+    },
+    {// 18
+        "question":"<p>You burst out of the box and punch the old man in the face several times.</p><p>Then, you withdraw the dagger from your waistband and stab him in the chest. The dagger breaks.</p><p>The old man falls down, dead before he hits the floor.</p><p>\"Not really my style, but whatevs,\" you say to yourself. You shrug, and carry on.</p>",
+        "answers":[
+            {"title":"Leave the office","response":29},
+            {"title":"Look around","response":30}
+            ]
+    },
+    {// 19
+        "question":"<p>\"Hawk, please come out of the box. You need help. I'm here to help you. Please. We all just want you to get better.\"</p>",
+        "answers":[
+            {"title":"It's Kung Fu time!","response":18,"ident":"officeFight"},
+            {"title":"Wait the bastard out","response":19},
+            {"title":"Open the box","response":20}
+            ]
+    },
+    {// 20
+        "question":"<p>You peek out under the lid to see an older gentleman in a brown suit staring down at you. He is smoking a pipe and stroking his chin.</p><p>\"Hmmm,\" he says to himself. \"Your psychological issues seem far worse than I'd initially believed. This is indeed worrisome.\"</p><p>You stand out of the box, trying to decide whether or not to punch his lights out. Instead, you allow him the chance to explain. \"You have five seconds doc, then I punch your lights out. Explain.\"</p><p>The doctor shakes his head sadly. \"Hawk, you suffer from paranoid schzophrenic delusions. In these delusions, you refer to yourself as some sort of super soldier called Hawk Abrams, Master Infiltrator. In these delusions, you've convinced yourself that there is no place in the galaxy that can keep you out. It's my job to help you see the truth, Hawk. You are not a master infiltrator. When you were twelve, you hit your head while playing underneath a carboard box. Today is the first time you've had any human contact in twenty years. This is the first time since you were twelve that you left that box.</p><p>The doctor points behind you. You turn to see that the wooden crate you snuck inside is now just a cardboard box, stuffed with torn pillows and clothing, food crumbs, drawing, rips, tears, and other stains.</p><p>\"I don't understand,\" you say. \"You claim that I haven't had any human contact, that I never became Hawk Abrams, and that I haven't left that box in twenty years?\"</p><p>The doctor nods. \"That's the truth\"</p><p>You think for a moment, and then reply:</p>",
+        "answers":[
+            {"title":"Please help me, doc. I want to get better","response":23},
+            {"title":"Nice try, doc. How would you like to try my fist in your face?","response":18,"ident":"officeFight"},
+            {"title":"Your story is convincing, but it doesn't make sense","response":24}
+            ]
+    },
+    {// 21
+        "question":"<p>You rush forward and punch the old man in the face several times.</p><p>He tazes you, then straps you to a chair and injects some kind of green glowing liquid into your neck.</p>",
+        "answers":[
+            {"title":"Ouchie?","response":22,"ident":"crazyTalkBtn"}
+            ]
+    },
+    {// 22
+        "question":("<p>The old man says something to you, but it sounds strange.</p><p id=\"crazyTalker\"></p><p id=\"stats\"></p>"),
+        "answers":[
+            {"title":"Can you repeat that?","response":22,"ident":"crazyTalkBtn"},
+            {"title":"Swallow the cyanide capsule embedded in your tooth","response":0}
+            ]
+    },
+    {// 23
+        "question":"<p>The old man straps you to a chair and injects some kind of green glowing liquid into your neck.</p>",
+        "answers":[
+            {"title":"Ouchie?","response":22,"ident":"crazyTalkBtn"}
+            ]
+    },
+    {// 24
+        "question":"<p>\"Why doesn't this make sense to you, Hawk?\"</p>",
+        "answers":[
+            {"title":"The part about the box doesn't add up","response":25},
+            {"title":"Something about my name doesn't seem right","response":26},
+            {"title":"I'm confused about the location of your office","response":27},
+            {"title":"Why are you treating me for free?","response":28}
+            ]
+    },
+    {// 25
+        "question":"<p>You look up and point your finger, \"How could I have been living in a box for twenty years? Wouldn't I have starved?\"</p><p>The doctor shakes his head, \"As you can see from the food stains inside the box, you were able to find food to feed yourself.\"</p>",
+        "answers":[
+            {"title":"Oh...","response":24}
+            ]
+    },
+    {// 26
+        "question":"<p>You raise an eyebrow, \"If I never became Hawk Abrams, then why, this whole time, have you been calling me Hawk, instead of my real name, Tomahawk, or the name I go by in everyday life, Tom?\"</p><p>The doctor begins to shake. He stutters a bit, and you smile triumphantly. \"No,\" he says. \"This can't be. I've failed! I've been outsmarted!\"</p><p>White as a sheet, the doctor rips open his desk drawer and pulls out a glowing green syringe. Before you can act, he injects it into his own neck. A moment later he falls to the ground.</p><p>\"Looks like the only thing getting under anyone's skin is that needle in yours,\" you say with a grin.</p><p>The doctor looks up at you, foam pouring from his lips. He tries to say something but you can't understand him. With nothing left to do, you leave him to his fate.</p>",
+        "answers":[
+            {"title":"Leave the office","response":29},
+            {"title":"Look around","response":30}
+            ]
+    },
+    {// 27
+        "question":"<p>You snap your fingers, \"Why is your office in such a strange facility?\"</p><p>The doctor shrugs. \"I got a great deal.\"</p>",
+        "answers":[
+            {"title":"Oh...","response":24}
+            ]
+    },
+    {// 28
+        "question":"<p>You clap your hands. \"How can you possibly be taking a profit if you're treating me for free?\"</p><p>The doctor chuckles and shakes his head. \"Out of the kindness of my heart, of course!\"</p><p>\"Wow, that's really cool of you, thanks!\"</p><p>\"My pleasure, Hawk. My pleasure indeed...\"</p>",
+        "answers":[
+            {"title":"Free stuff is the best!","response":23}
+            ]
+    },
+    {// 29
+        "question":"<p>You open the door of the doctor's office slowly and peer into the hallway.</p><p>You see a poster which is an advertisment to work at the Derango facility.</p><p><em>Looking for work?<br><br>In the future, the Derango facility will not be regarded as evil, but as the company that saved the world!<br><br>Join us now, get paid in stock options, and become a soon-to-be millionaire!</em></p><p>The walls behind the poster are metallic silver, as are the floors and ceilings. The overhead florescent lighting desaturates and seems to cook your skin.</p><p>The hallway branches off in two directions. Two roads diverged in a metallic hallway. LEFT, or RIGHT. The left hallway seems less traveled by.</p>",
+        "answers":[
+            {"title":"Go left","response":31},
+            {"title":"Go right","response":32}
+            ]
+    },
+    {// 30
+        "question":"<p>You look around the office. There is a large oak desk with papers and pencils and a sticky note that reads <em>\"Never click lethal force!!\"</em>, a black leather swivel chair, two diplomas, a silver and gold egg encrusted with rubies, diamonds, emeralds, and rhinestones, and against the wall a large book case with hundreds of thick textbooks.</p><p>\"Nothing of use here,\" you say to yourself.</p><p>You glance down at the body of the doctor and see a card key hanging from his belt loop.</p><p>You take the CARD KEY.</p>",
+        "answers":[
+            {"title":"Leave the office","response":29}
+            ]
+    },
+    {// 31
+        "question":"<p>You take the hallway less traveled by, which is a good choice considering you're a MASTER INFLILTRATOR and you're supposed to be infiltrating without being seen.</p><p></p>",
+        "answers":[
+          {"title":"Continue","response":33},
+          {"title":"Don't continue","response":34}
+          ]
+    },
+    {// 32
+        "question":"<p>You go down the hallway that seems more popular. As they say, <em>the hair that grows in the opposite direction gets shaved.</em></p><p>Unfortunately, you are not a hair, and unfortunately still, that is not a phrase.</p><p>You walk down the hall, looking left and right, snooping and sneaking.</p><p>You turn a corner, and walk right into a guard, followed by four more guards, followed by three attack dogs and a miniature tank with a high-ranking miniature man manning the miniature tank.\"The name's Chan, Hank Chan, and I'm a little crank lanky man and I don't recognize you, man. What's your rank?\"</p>",
+        "answers":[
+          {"title":"Private","response":33},
+          {"title":"General","response":33},
+          {"title":"I'm the doctor's intern","response":34},
+          {"title":"Master Infiltrator","response":33}
+          ]
+    }
+    ,
+    {// 33
+        "question":"<p>\"GOODBYE LIAR!\"</p><p>The miniature man fires his miniature tank, and kills not only you, but the two guards at his flank.</p><p id=\"stats\"></p>",
+        "answers":[
+          {"title":"Restart?","response":0}
+          ]
+    }
+];
+// Start stats and equipment
+var currentLocation = 12;
+var hasDagger = false;
+var killCount = 0;
+var hasBazooka = false;
+var hasCardKey = false;
+var finalScore = 0;
+var allStats = function() {
+		  console.log("Dagger/killcount/bazooka/cardkey/finalScore = " + hasDagger + "/" + killCount + "/" + hasBazooka + "/" + hasCardKey + "/" + finalScore);
+		  }
+allStats()
+
+// Score of the game
+document.getElementById("answers").onclick = function() {
+  if (currentLocation === 0) {
+  }
+  else {
+    finalScore = finalScore + 1;
+    allStats()
+  }
+}
+
+window.printCurrentLocation = function(){
+	// This loads the text of the current location
+    document.getElementById("question").innerHTML = db[currentLocation].question;
+    // Fade in code (aDC is animation Delay Count)
+    document.getElementById("question").children[0].className += " fadeIn";
+    var aDC = (question.getElementsByTagName("p").length) + "s";
+    document.documentElement.style.setProperty(`--aDC`, aDC);
+    // Code to read the answers array
+    var answers = "";
+    for(var i=0,l=db[currentLocation].answers.length;i<l;i++){
+        answers += "<p><button id="+db[currentLocation].answers[i].ident+" onclick='setLocation("+db[currentLocation].answers[i].response+")'>"+db[currentLocation].answers[i].title+"</button></p>";
+    }
+    // This loads the text of the answer buttons
+    document.getElementById("answers").innerHTML = answers;
+
+    // Game reset
+    if (currentLocation === 0) {
+    		hasDagger = false;
+    		killCount = 0;
+    		hasBazooka = false;
+    		hasCardKey = false;
+    		finalScore = 0;
+    		allStats()
+    	}
+    // bazooka script
+        if (currentLocation === 10) {
+    			hasBazooka = true;
+    	}
+    // dagger script
+        if (currentLocation === 4) {
+    			hasDagger = true;
+    	}
+    // Bazooka ending script
+    	if (hasBazooka === true && currentLocation === 6) {
+    		document.getElementById("bazookaOwned").onclick = function () {
+    			killCount = killCount + 891;
+    			setLocation(11)
+    		}
+    		document.getElementById("bazookaOwned2").onclick = function () {
+    			killCount = killCount + 891;
+    			setLocation(11)
+    		}
+    	}
+    	else if(hasBazooka === false && currentLocation === 6){
+    		document.getElementById("bazookaOwned").onclick = function () {
+    			setLocation(1)
+    		}
+    		document.getElementById("bazookaOwned2").onclick = function () {
+    			setLocation(2)
+    		}
+    	}
+    // Window fight script
+    	if (hasDagger === true && currentLocation === 2) {
+    		document.getElementById("windowFight").onclick = function () {
+    			setLocation(5)
+    			hasDagger = false
+    			killCount = killCount + 1;
+    		}
+    	}
+    	else if(hasDagger === false && currentLocation === 2){
+    		document.getElementById("windowFight").onclick = function () {
+    			setLocation(3)
+    		}
+    	}
+    // Shipping fight script
+    	if (hasDagger === true && currentLocation === 7) {
+    		document.getElementById("shippingFight").onclick = function () {
+    			killCount = killCount + 3;
+    			setLocation(9)
+                hasDagger = false
+    		}
+    	}
+    	else if(hasDagger === false && currentLocation === 7){
+    		document.getElementById("shippingFight").onclick = function () {
+    			setLocation(8);
+    		}
+    	}
+    // Office fight script
+        if ((hasDagger === true && currentLocation === 17) || (hasDagger === true && currentLocation === 20)) {
+            document.getElementById("officeFight").onclick = function () {
+                killCount = killCount + 1;
+                setLocation(18)
+                hasDagger = false
+            }
+        }
+        else if((hasDagger === false && currentLocation === 17) || (hasDagger === false && currentLocation === 20)){
+            document.getElementById("officeFight").onclick = function () {
+                setLocation(21);
+            }
+        }
+    // doctor crazy talk array
+        var crazyTalk = ["back","best","better","bitter","clean","clear","collect","counter","crisscross","damn","down","even","express","fair","fast","firm","flush","forward","full","last","light","low","okay","out","plain","plumb","plump","quiet","right","rough","round","second","short","solo","still","well","worst","wrong"]
+        if (currentLocation === 21 || currentLocation === 22 || currentLocation === 23) {
+            document.getElementById("crazyTalkBtn").onclick = function () {
+                setLocation(22);
+                crazyTalk = shuffle(crazyTalk)
+                document.getElementById("crazyTalker").innerHTML = "\"The " + crazyTalk[0] + " " + crazyTalk[1] + " " + crazyTalk[3] + "ed the " + crazyTalk[5] + " while " + crazyTalk[6] + "ing the " + crazyTalk[7] + ".\""
+            }
+        }
+    // cardkey script
+        if (currentLocation === 30) {
+    			hasCardKey = true;
+    	}
+    // Final stats
+    	if (currentLocation === 9 || currentLocation === 3 || currentLocation === 8 || currentLocation === 11 || currentLocation === 14 || currentLocation === 16 || currentLocation === 22 || currentLocation === 33) {
+    		document.getElementById("stats").innerHTML = ("Kill count: " + killCount + "<br>Score: " + (finalScore + 1) + "00");
+    	}
+    // Final stats end
+    
+// end of main function
+}
+// This takes the setLocation in the array string and makes sure it's a number, then sets the current location to that number
+window.setLocation = function(num) {
+    currentLocation = num;
+    window.printCurrentLocation();
+}
+window.printCurrentLocation();
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
