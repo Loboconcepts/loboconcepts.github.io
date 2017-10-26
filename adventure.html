@@ -158,6 +158,10 @@
         }
         /*End blinker*/
 
+        button {
+            height:30px;
+        }
+
 	</style>
 </head>
 <body>
@@ -242,7 +246,7 @@ var db = [
         "question":"<p>You are outside of the secret facility. You must infiltrate.</p>",
         "answers":[
             {"title":"Enter through door","response":1,"ident":"bazookaOwned"},
-            {"title":"Walk around the building","response":2,"ident":"bazookaOwned2"}
+            {"title":"Walk around the building","response":2}
             ]
     },
     {// 7
@@ -400,7 +404,7 @@ var db = [
             ]
     },
     {// 30
-        "question":"<p>You look around the office. There is a large oak desk with papers and pencils and a sticky note that reads <em>\"Never click lethal force!!\"</em>, a black leather swivel chair, two diplomas, a silver and gold egg encrusted with rubies, diamonds, emeralds, and rhinestones, and against the wall a large book case with hundreds of thick textbooks.</p><p>\"Nothing of use here,\" you say to yourself.</p><p>You glance down at the body of the doctor and see a card key hanging from his belt loop.</p><p>You take the CARD KEY.</p>",
+        "question":"<p>You look around the office. There is a large oak desk with papers and pencils and a sticky note that reads <em>Never click lethal force!!</em>, a black leather swivel chair, two diplomas, a silver and gold egg encrusted with rubies, diamonds, emeralds, and rhinestones, and against the wall a large book case with hundreds of thick textbooks.</p><p>\"Nothing of use here,\" you say to yourself.</p><p>You glance down at the body of the doctor and see a card key hanging from his belt loop.</p><p>You take the CARD KEY.</p>",
         "answers":[
             {"title":"Leave the office","response":29}
             ]
@@ -453,7 +457,7 @@ var db = [
           ]
     },
     {// 38
-        "question":"<p>The door opens slowly.</p><p>So slowly, in fact, that you begin to suspect that this may end on a cliff-hanger.</p><p>What you saw next blew your mind.</p><p>To be continued...</p><p id=\"stats\"></p><p id=\"statAnalysis\"></p>",
+        "question":"<p>The door opens slowly.</p><p>So slowly, in fact, you suspect that this may end on a cliff-hanger.</p><p>What you saw next blew your mind.</p><p>To be continued...</p><p id=\"stats\"></p><p id=\"statAnalysis\"></p>",
         "answers":[
           {"title":"Go again?","response":0}
           ]
@@ -473,7 +477,13 @@ var db = [
     {// 41
         "question":"<p>You withdraw your dagger.</p><p>Before the first guard can blink, a dagger enters his skull, right between the eyes. The second guard fires at you, but you're already flipping through the air. You kick him in the chest and he flies backwards.</p><p>You pick up the first guard's gun, and before the other one can shout for help, you snuff him out.</p><p>On his person is a CARD KEY</p>",
         "answers":[
-          {"title":"Fight!","response":38}
+          {"title":"Swipe","response":38}
+          ]
+    },
+    {// 42
+        "question":"<p>You withdraw your BAZOOKA.</p><p>The two guards scream and try to run, but when one has a bazooka, one leaves no witnesses.</p><p>You launch the missile. It flies at the guards, and before they can finish crying, they explode.</p><p>You don't feel very good about yourself, but such is the life.</p><p>You take the CARD KEY from their ashes.</p>",
+        "answers":[
+          {"title":"Swipe","response":38}
           ]
     }
 ];
@@ -537,17 +547,10 @@ window.printCurrentLocation = function(){
     			killCount = killCount + 891;
     			setLocation(11)
     		}
-    		document.getElementById("bazookaOwned2").onclick = function () {
-    			killCount = killCount + 891;
-    			setLocation(11)
-    		}
     	}
     	else if(hasBazooka === false && currentLocation === 6){
     		document.getElementById("bazookaOwned").onclick = function () {
     			setLocation(1)
-    		}
-    		document.getElementById("bazookaOwned2").onclick = function () {
-    			setLocation(2)
     		}
     	}
     // Window fight script
@@ -627,6 +630,14 @@ window.printCurrentLocation = function(){
     			setLocation(40)
     		}
     	}
+        else if(hasDagger === false && currentLocation === 39 && hasBazooka === true){
+            document.getElementById("doorFight").onclick = function () {
+                setLocation(41)
+                hasBazooka = false
+                hasCardKey = true
+                killCount = killCount + 2;
+            }
+        }
     // Final stats
     	if (currentLocation === 9 || currentLocation === 3 || currentLocation === 8 || currentLocation === 11 || currentLocation === 14 || currentLocation === 16 || currentLocation === 22 || currentLocation === 33 || currentLocation === 38) {
     		document.getElementById("stats").innerHTML = ("Kill count: " + killCount + "<br>Score: " + (finalScore + killCount + 1) + "00");
@@ -636,7 +647,7 @@ window.printCurrentLocation = function(){
       document.getElementById("statAnalysis").innerHTML = "<strong>You are a filthy cheater</strong>"
     }
     else if (currentLocation === 38 && finalScore === 12) {
-      document.getElementById("statAnalysis").innerHTML = "You are actually a master infiltrator. Not too bad. Not too bad at all."
+      document.getElementById("statAnalysis").innerHTML = "You are a master infiltrator. Wow. Not too bad. Not too bad at all."
     }
     else if (currentLocation === 38 && finalScore > 12 && finalScore <16) {
       document.getElementById("statAnalysis").innerHTML = "You made a few mistakes here and there, but you made it..."
