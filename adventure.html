@@ -443,7 +443,7 @@ var db = [
     {// 36
         "question":"<p>You walk down a long hallway, the florescent lights boring down on you. There's a thickness to the air here&mdash;it sends claws through the walls to grab at your skin. You must hurry.</p><p>Suddenly, you hear a screaming. Agonizing and deafening, it sends shivers down your spine. You're reminded of that scene from <em>The Princess Bride</em> \"That is the sound of ultimate suffering.\"</p><p>You arrive at a large metallic door, it hides source of the screaming. Now is your moment.</p><p>What do you do?</p>",
         "answers":[
-          {"title":"Swipe","response":33,"ident":"swippitySwipe"}
+          {"title":"Swipe","response":39,"ident":"swippitySwipe"}
           ]
     },
     {// 37
@@ -608,7 +608,7 @@ window.printCurrentLocation = function(){
     			setLocation(38);
     		  }
         }
-        else if (hasCardKey === true && currentLocation === 36) {
+        else if (hasCardKey === false && currentLocation === 36) {
           document.getElementById("swippitySwipe").onclick = function () {
     			setLocation(39);
     		  }
