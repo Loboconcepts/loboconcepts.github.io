@@ -167,7 +167,7 @@
         <span style="color:red">You must enable Javascript to continue!</span>
       </div>
     </noscript>
-    <a onclick="setLocation(29)">Shortcut</a>
+    <!--<a onclick="setLocation(29)">Shortcut</a>-->
 <div id="question"></div>
 <div id="answers"></div>
 
@@ -309,7 +309,7 @@ var db = [
             ]
     },
     {// 17
-        "question":"<p>You clench your teeth and deal with the singing.</p><p>Finally, after what seemed like an eternity, he shuts his damn mouth. You hear another man, with a deeper voice, and older, direct the guard. \"Place the box down over there and leave us, please.\"</p><p>Your box is moved again, and a moment later you are lowered onto the floor. You hear the guard drive off.<p>There is silence now, though you know just feet away from you, there stands a gentleman who will soon discover that his delivery came with a little something extra.</p><p>You clench your fists and prepare for a fight, when suddenly, the man begins talking. </p><p>\"You can come on out of the box now, Hawk. You and I have a lot to talk about...\"</p>",
+        "question":"<p>You grind your teeth and deal with the singing.</p><p>Finally, after what seemed like an eternity, he shuts his damn mouth. You hear another man, with a deeper voice, and older, direct the guard. \"Place the box down over there and leave us, please.\"</p><p>Your box is moved again, and a moment later you are lowered onto the floor. You hear the guard drive off.<p>There is silence now, though you know just feet away from you, there stands a gentleman who will soon discover that his delivery came with a little something extra.</p><p>You clench your fists and prepare for a fight, when suddenly, the man begins talking. </p><p>\"You can come on out of the box now, Hawk. You and I have a lot to talk about...\"</p>",
         "answers":[
             {"title":"Explode out of the box and kill this fool","response":18,"ident":"officeFight"},
             {"title":"Wait","response":19},
@@ -429,13 +429,13 @@ var db = [
           ]
     },
     {// 34
-        "question":"<p>\"Hmmm. I didn't know we had an internship program here,\" Hank Chan said.</p><p>He scratched his chin. \"Oh well. All seems in order here, men. Let's move along.\"</p><p>Hank Chan and his guard, four more guards, three attack dogs and a miniature tank move past you. Your safe. Or so you think...\"</p>",
+        "question":"<p>\"Hmmm. I didn't know we had an internship program here,\" Hank Chan says.</p><p>He scratches his chin. \"Oh well. All seems in order here, men. Let's move along.\"</p><p>Hank Chan and his guard, four more guards, three attack dogs and a miniature tank move past you. You're safe. Or so you think...\"</p>",
         "answers":[
           {"title":"Phew, that was a&mdash;","response":33}
           ]
     },
     {// 35
-        "question":"<p>\"Is that so?\" Hank Chan said.</p><p>\"Well, you seem to suck at your job. I'll do you a solid. Turn around and go the other way. Go ahead.\"</p>",
+        "question":"<p>\"Is that so?\" Hank Chan says.</p><p>\"Well, you seem to suck at your job. I'll do you a solid. Turn around and go the other way. Go ahead.\"</p>",
         "answers":[
           {"title":"Turn around. Every now and then I get...","response":31}
           ]
@@ -453,15 +453,27 @@ var db = [
           ]
     },
     {// 38
-        "question":"<p></p>",
+        "question":"<p>The door opens slowly.</p><p>So slowly, in fact, that you begin to suspect that this may end on a cliff-hanger.</p><p>What you saw next blew your mind.</p><p>To be continued...</p><p id=\"stats\"></p><p id=\"statAnalysis\"></p>",
         "answers":[
-          {"title":"Continue","response":33}
+          {"title":"Go again?","response":0}
           ]
     },
     {// 39
-        "question":"<p>You have nothing to swipe. You don't have a CARD KEY</p>",
+        "question":"<p>You have nothing to swipe. You don't have a CARD KEY</p><p>The alarm above the door begins to beep red while you fumble around like a moron.</p><p>Two guards approach. \"Hey! You aren't supposed to be here!\" one of them shouts. They reach to draw their pistols. You only have a second to act.</p>",
         "answers":[
-          {"title":"Continue","response":36}
+          {"title":"Fight!","response":40, "ident":"doorFight"}
+          ]
+    },
+    {// 40
+        "question":"<p>You rush at them, as unarmed as the day that stork dropped you headfirst into this pile of shit called earth.</p><p>You never even stood a chance.</p><p>You unleash a bloodcurling howl, and the guards unload countless bullets into you.</p><p>You're dead before you even hit the floor.</p><p id=\"stats\"></p>",
+        "answers":[
+          {"title":"Restart?","response":0}
+          ]
+    },
+    {// 41
+        "question":"<p>You withdraw your dagger.</p><p>Before the first guard can blink, a dagger enters his skull, right between the eyes. The second guard fires at you, but you're already flipping through the air. You kick him in the chest and he flies backwards.</p><p>You pick up the first guard's gun, and before the other one can shout for help, you snuff him out.</p><p>On his person is a CARD KEY</p>",
+        "answers":[
+          {"title":"Fight!","response":38}
           ]
     }
 ];
@@ -601,11 +613,41 @@ window.printCurrentLocation = function(){
     			setLocation(39);
     		  }
         }
-    // Final stats
-    	if (currentLocation === 9 || currentLocation === 3 || currentLocation === 8 || currentLocation === 11 || currentLocation === 14 || currentLocation === 16 || currentLocation === 22 || currentLocation === 33) {
-    		document.getElementById("stats").innerHTML = ("Kill count: " + killCount + "<br>Score: " + (finalScore + 1) + "00");
+    // door fight script
+    	if (hasDagger === true && currentLocation === 39) {
+    		document.getElementById("doorFight").onclick = function () {
+    			setLocation(41)
+    			hasDagger = false
+    			hasCardKey = true
+    			killCount = killCount + 2;
+    		}
     	}
-    // Final stats end
+    	else if(hasDagger === false && currentLocation === 39){
+    		document.getElementById("doorFight").onclick = function () {
+    			setLocation(40)
+    		}
+    	}
+    // Final stats
+    	if (currentLocation === 9 || currentLocation === 3 || currentLocation === 8 || currentLocation === 11 || currentLocation === 14 || currentLocation === 16 || currentLocation === 22 || currentLocation === 33 || currentLocation === 38) {
+    		document.getElementById("stats").innerHTML = ("Kill count: " + killCount + "<br>Score: " + (finalScore + killCount + 1) + "00");
+    	}
+    // Final stat score analysis
+    if (currentLocation === 38 && finalScore < 12) {
+      document.getElementById("statAnalysis").innerHTML = "<strong>You are a filthy cheater</strong>"
+    }
+    else if (currentLocation === 38 && finalScore === 12) {
+      document.getElementById("statAnalysis").innerHTML = "You are actually a master infiltrator. Not too bad. Not too bad at all."
+    }
+    else if (currentLocation === 38 && finalScore > 12 && finalScore <16) {
+      document.getElementById("statAnalysis").innerHTML = "You made a few mistakes here and there, but you made it..."
+    }
+    else if (currentLocation === 38 && finalScore >=14 && finalScore < 20) {
+      document.getElementById("statAnalysis").innerHTML = "You coulda done better but I don't mind. You just kinda wasted my precious time. But don't think twice, it's alright."
+    }
+    else if (currentLocation === 38 && finalScore >= 20) {
+      document.getElementById("statAnalysis").innerHTML = "What'd you do, stop and read <em>Ulysses</em> to every single guard? You barely completely the mission. You're a loose cannon. Get the hell out of my office."
+    }
+    
     
 // end of main function
 }
@@ -621,3 +663,4 @@ window.printCurrentLocation();
 
 </body>
 </html>
+
