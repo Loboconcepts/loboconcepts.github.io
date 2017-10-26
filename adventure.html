@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -409,24 +408,60 @@ var db = [
     {// 31
         "question":"<p>You take the hallway less traveled by, which is a good choice considering you're a MASTER INFLILTRATOR and you're supposed to be infiltrating without being seen.</p><p></p>",
         "answers":[
-          {"title":"Continue","response":33},
-          {"title":"Don't continue","response":34}
+          {"title":"Continue","response":36},
+          {"title":"Don't continue","response":37}
           ]
     },
     {// 32
-        "question":"<p>You go down the hallway that seems more popular. As they say, <em>the hair that grows in the opposite direction gets shaved.</em></p><p>Unfortunately, you are not a hair, and unfortunately still, that is not a phrase.</p><p>You walk down the hall, looking left and right, snooping and sneaking.</p><p>You turn a corner, and walk right into a guard, followed by four more guards, followed by three attack dogs and a miniature tank with a high-ranking miniature man manning the miniature tank.\"The name's Chan, Hank Chan, and I'm a little crank lanky man and I don't recognize you, man. What's your rank?\"</p>",
+        "question":"<p>You go down the hallway that seems more popular. As they say, <em>the hair that grows in the opposite direction gets shaved.</em></p><p>Unfortunately, you are not a hair, and unfortunately still, that is not a phrase.</p><p>You walk down the hall, looking left and right, snooping and sneaking.</p><p>You turn a corner, and walk right into a guard, followed by four more guards, followed by three attack dogs and a miniature tank with a high-ranking miniature man manning the miniature tank.\"The name's Chan, Hank Chan, and I'm a hanky crank tank man. What's your rank?\"</p>",
         "answers":[
           {"title":"Private","response":33},
           {"title":"General","response":33},
           {"title":"I'm the doctor's intern","response":34},
-          {"title":"Master Infiltrator","response":33}
+          {"title":"Master Infiltrator","response":35}
           ]
     }
     ,
     {// 33
-        "question":"<p>\"GOODBYE LIAR!\"</p><p>The miniature man fires his miniature tank, and kills not only you, but the two guards at his flank.</p><p id=\"stats\"></p>",
+        "question":"<p>\"GOODBYE LIAR!\"</p><p>Hank Chan fires his miniature tank, and kills not only you, but the two guards at his flank.</p><p id=\"stats\"></p>",
         "answers":[
           {"title":"Restart?","response":0}
+          ]
+    },
+    {// 34
+        "question":"<p>\"Hmmm. I didn't know we had an internship program here,\" Hank Chan said.</p><p>He scratched his chin. \"Oh well. All seems in order here, men. Let's move along.\"</p><p>Hank Chan and his guard, four more guards, three attack dogs and a miniature tank move past you. Your safe. Or so you think...\"</p>,
+        "answers":[
+          {"title":"Phew, that was a&mdash;","response":33}
+          ]
+    },
+    {// 35
+        "question":"<p>\"Is that so?\" Hank Chan said.</p><p>\"Well, you seem to suck at your job. I'll do you a solid. Turn around and go the other way. Go ahead.\"</p>",
+        "answers":[
+          {"title":"Turn around. Every now and then I get...","response":31}
+          ]
+    },
+    {// 36
+        "question":"<p>You walk down a long hallway, the florescent lights boring down on you. There's a thickness to the air here&mdash;it sends claws through the walls to grab at your skin. You must hurry.</p><p>Suddenly, you hear a screaming. Agonizing and deafening, it sends shivers down your spine. You're reminded of that scene from <em>The Princess Bride</em> \"That is the sound of ultimate suffering.\"</p><p>You arrive at a large metallic door, it hides source of the screaming. Now is your moment.</p><p>What do you do?</p>",
+        "answers":[
+          {"title":"Swipe","response":33,"ident":"swippitySwipe"}
+          ]
+    },
+    {// 37
+        "question":"<p><img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Middle_finger_BNC.jpg/400px-Middle_finger_BNC.jpg\" style=\"max-width:100%;width:250px;text-align:center;\"></p>",
+        "answers":[
+          {"title":"Continue","response":36}
+          ]
+    },
+    {// 38
+        "question":"<p></p>",
+        "answers":[
+          {"title":"Continue","response":33}
+          ]
+    },
+    {// 39
+        "question":"<p>You have nothing to swipe. You don't have a CARD KEY</p>",
+        "answers":[
+          {"title":"Continue","response":36}
           ]
     }
 ];
@@ -475,11 +510,11 @@ window.printCurrentLocation = function(){
     		hasCardKey = false;
     		finalScore = 0;
     		allStats()
-    	}
+    	};
     // bazooka script
         if (currentLocation === 10) {
     			hasBazooka = true;
-    	}
+    	};
     // dagger script
         if (currentLocation === 4) {
     			hasDagger = true;
@@ -554,7 +589,18 @@ window.printCurrentLocation = function(){
     // cardkey script
         if (currentLocation === 30) {
     			hasCardKey = true;
-    	}
+    	  }
+    // Swippity Swipe, can enter last room
+        if (hasCardKey === true && currentLocation === 36) {
+          document.getElementById("swippitySwipe").onclick = function () {
+    			setLocation(38);
+    		  }
+        }
+        else if (hasCardKey === true && currentLocation === 36) {
+          document.getElementById("swippitySwipe").onclick = function () {
+    			setLocation(39);
+    		  }
+        }
     // Final stats
     	if (currentLocation === 9 || currentLocation === 3 || currentLocation === 8 || currentLocation === 11 || currentLocation === 14 || currentLocation === 16 || currentLocation === 22 || currentLocation === 33) {
     		document.getElementById("stats").innerHTML = ("Kill count: " + killCount + "<br>Score: " + (finalScore + 1) + "00");
@@ -575,27 +621,3 @@ window.printCurrentLocation();
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
